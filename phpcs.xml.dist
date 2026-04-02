@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ruleset name="Drupal Custom Code">
+  <description>Drupal + DrupalPractice standards for custom modules and themes.</description>
+
+  <!-- Limit scans to existing custom code paths -->
+  <file>web</file>
+
+  <!-- Exclude core and vendor explicitly, in case they're under the same root -->
+  <exclude-pattern>web/core/*</exclude-pattern>
+  <exclude-pattern>vendor/*</exclude-pattern>
+
+  <!-- Apply Drupal and DrupalPractice coding standards -->
+  <rule ref="Drupal"/>
+  <rule ref="DrupalPractice"/>
+</ruleset>

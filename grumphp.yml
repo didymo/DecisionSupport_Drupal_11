@@ -1,0 +1,12 @@
+grumphp:
+      stop_on_failure: false
+      tasks:
+        phpcs:
+          standard: phpcs.xml.dist
+          triggered_by: [php, module, inc, install, theme]
+          whitelist_patterns:
+            - /^web\/modules\/custom\/(.*)/
+            - /^web\/themes\/custom\/(.*)/
+        phpstan:
+          configuration: phpstan.neon
+          level: 2
