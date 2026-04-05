@@ -1,0 +1,7 @@
+entity.process.settings:
+  path: 'admin/structure/process'
+  defaults:
+    _form: '\Drupal\process\Form\ProcessSettingsForm'
+    _title: 'Process'
+  requirements:
+    _permission: 'administer process'

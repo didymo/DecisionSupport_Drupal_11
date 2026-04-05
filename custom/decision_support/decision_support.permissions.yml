@@ -1,0 +1,17 @@
+administer decision_support_entity:
+  title: 'Administer decision supports'
+  restrict access: true
+view decision_support_entity:
+  title: 'View decision support'
+edit decision_support_entity:
+  title: 'Edit decision support'
+delete decision_support_entity:
+  title: 'Delete decision support'
+create decision_support_entity:
+  title: 'Create decision support'
+view decision_support_entity revision:
+  title: 'View decision support revision'
+revert decision_support_entity revision:
+  title: 'Revert decision support revision'
+delete decision_support_entity revision:
+  title: 'Delete decision support revision'

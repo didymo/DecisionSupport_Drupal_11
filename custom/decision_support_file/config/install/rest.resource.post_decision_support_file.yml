@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - decision_support_file
+    - serialization
+    - simple_oauth
+    - user
+id: post_decision_support_file
+plugin_id: post_decision_support_file
+granularity: resource
+configuration:
+  methods:
+    - POST
+  formats:
+    - json
+  authentication:
+    - oauth2
+    - cookie

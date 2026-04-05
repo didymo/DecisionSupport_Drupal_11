@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - process
+    - serialization
+    - simple_oauth
+    - user
+id: delete_process_resource
+plugin_id: delete_process_resource
+granularity: resource
+configuration:
+  methods:
+    - PATCH
+  formats:
+    - json
+  authentication:
+    - oauth2
+    - cookie

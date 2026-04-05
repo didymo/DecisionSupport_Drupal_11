@@ -1,0 +1,11 @@
+entity.decision_support_file.settings:
+  title: 'Decision Support File'
+  description: 'Configure a Decision Support File entity type.'
+  route_name:  entity.decision_support_file.settings
+  parent: system.admin_structure
+
+entity.decision_support_file.collection:
+  title: 'Decision Support Files'
+  description: 'List of decision support files.'
+  route_name: entity.decision_support_file.collection
+  parent: system.admin_content

@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - process
+    - serialization
+    - simple_oauth
+    - user
+id: post_process_resource
+plugin_id: post_process_resource
+granularity: resource
+configuration:
+  methods:
+    - POST
+  formats:
+    - json
+  authentication:
+    - oauth2
+    - cookie

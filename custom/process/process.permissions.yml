@@ -1,0 +1,17 @@
+administer process:
+  title: 'Administer processes'
+  restrict access: true
+view process:
+  title: 'View process'
+edit process:
+  title: 'Edit process'
+delete process:
+  title: 'Delete process'
+create process:
+  title: 'Create process'
+view process revision:
+  title: 'View process revision'
+revert process revision:
+  title: 'Revert process revision'
+delete process revision:
+  title: 'Delete process revision'

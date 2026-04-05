@@ -1,0 +1,11 @@
+entity.process.settings:
+  title: 'Process'
+  description: 'Configure a Process entity type.'
+  route_name:  entity.process.settings
+  parent: system.admin_structure
+
+entity.process.collection:
+  title: 'Processes'
+  description: 'List of processes.'
+  route_name: entity.process.collection
+  parent: system.admin_content

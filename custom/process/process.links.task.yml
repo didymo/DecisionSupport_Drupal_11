@@ -1,0 +1,22 @@
+entity.process.settings:
+  title: 'Settings'
+  route_name: entity.process.settings
+  base_route: entity.process.settings
+entity.process.view:
+  title: 'View'
+  route_name: entity.process.canonical
+  base_route: entity.process.canonical
+entity.process.edit_form:
+  title: 'Edit'
+  route_name: entity.process.edit_form
+  base_route: entity.process.canonical
+entity.process.delete_form:
+  title: 'Delete'
+  route_name: entity.process.delete_form
+  base_route: entity.process.canonical
+  weight: 10
+entity.process.collection:
+  title: 'Processes'
+  route_name: entity.process.collection
+  base_route: system.admin_content
+  weight: 10

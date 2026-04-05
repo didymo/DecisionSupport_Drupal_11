@@ -1,0 +1,4 @@
+services:
+  process.service:
+    class:  Drupal\process\Services\ProcessService\ProcessService
+    arguments: ['@entity_type.manager', '@logger.channel.default']

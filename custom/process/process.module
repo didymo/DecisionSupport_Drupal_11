@@ -1,0 +1,97 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * @file
+ * Provides a process entity type.
+ */
+
+use Drupal\Core\Render\Element;
+use Drupal\Core\Entity\RevisionableStorageInterface;
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function process_theme(): array {
+  return [
+    'process' => ['render element' => 'elements'],
+  ];
+}
+
+/**
+ * Prepares variables for process templates.
+ *
+ * Default template: process.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the process information and any
+ *     fields attached to the entity.
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_process(array &$variables): void {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+}
+
+/**
+ * Implements hook_user_cancel().
+ */
+function process_user_cancel($edit, UserInterface $account, $method): void {
+  switch ($method) {
+    case 'user_cancel_block_unpublish':
+      // Unpublish processes.
+      $storage = \Drupal::entityTypeManager()->getStorage('process');
+      $process_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->condition('status', 1)
+        ->accessCheck(FALSE)
+        ->execute();
+      foreach ($storage->loadMultiple($process_ids) as $process) {
+        $process->set('status', FALSE)->save();
+      }
+      break;
+
+    case 'user_cancel_reassign':
+      // Anonymize processes.
+      $storage = \Drupal::entityTypeManager()->getStorage('process');
+      $process_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->accessCheck(FALSE)
+        ->execute();
+      foreach ($storage->loadMultiple($process_ids) as $process) {
+        $process->setOwnerId(0)->save();
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_predelete() for user entities.
+ */
+function process_user_predelete(UserInterface $account): void {
+  // Delete processes that belong to this account.
+  $storage = \Drupal::entityTypeManager()->getStorage('process');
+  $process_ids = $storage->getQuery()
+    ->condition('uid', $account->id())
+    ->accessCheck(FALSE)
+    ->execute();
+  $storage->delete(
+    $storage->loadMultiple($process_ids)
+  );
+  // Delete old revisions.
+  $process_ids = $storage->getQuery()
+    ->allRevisions()
+    ->condition('uid', $account->id())
+    ->accessCheck(FALSE)
+    ->execute();
+  if ($storage instanceof RevisionableStorageInterface) {
+    foreach (array_keys($process_ids) as $revision_id) {
+      $storage->deleteRevision($revision_id);
+    }
+  }
+}

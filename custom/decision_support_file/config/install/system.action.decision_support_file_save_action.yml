@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - decision_support_file
+id: decision_support_file_save_action
+label: 'Save decision support files'
+type: decision_support_file
+plugin: entity:save_action:decision_support_file
+configuration: {  }

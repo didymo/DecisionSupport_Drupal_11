@@ -1,0 +1,10 @@
+entity.decision_support_entity.edit_form:
+  route_name: entity.decision_support_entity.edit_form
+  group: decision_support_entity
+  title: 'Edit'
+
+entity.decision_support_entity.delete_form:
+  route_name: entity.decision_support_entity.delete_form
+  group: decision_support_entity
+  title: 'Delete'
+  weight: 10

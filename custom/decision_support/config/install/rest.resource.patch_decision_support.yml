@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - decision_support
+    - serialization
+    - simple_oauth
+id: patch_decision_support
+plugin_id: patch_decision_support
+granularity: resource
+configuration:
+  methods:
+    - PATCH
+  formats:
+    - json
+  authentication:
+    - oauth2
+    - cookie

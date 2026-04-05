@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - decision_support
+    - serialization
+    - simple_oauth
+id: archive_decision_support
+plugin_id: archive_decision_support
+granularity: resource
+configuration:
+  methods:
+    - DELETE
+  formats:
+    - json
+  authentication:
+    - oauth2
+    - cookie

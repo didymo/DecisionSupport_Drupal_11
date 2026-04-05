@@ -1,0 +1,7 @@
+entity.decision_support_file.settings:
+  path: 'admin/structure/decision-support-file'
+  defaults:
+    _form: '\Drupal\decision_support_file\Form\DecisionSupportFileSettingsForm'
+    _title: 'Decision Support File'
+  requirements:
+    _permission: 'administer decision_support_file'

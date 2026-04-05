@@ -1,0 +1,85 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * @file
+ * Provides a decision support file entity type.
+ */
+
+use Drupal\Core\Render\Element;
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function decision_support_file_theme(): array {
+  return [
+    'decision_support_file' => ['render element' => 'elements'],
+  ];
+}
+
+/**
+ * Prepares variables for decision support file templates.
+ *
+ * Default template: decision-support-file.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the decision support file information and any
+ *     fields attached to the entity.
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_decision_support_file(array &$variables): void {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+}
+
+/**
+ * Implements hook_user_cancel().
+ */
+function decision_support_file_user_cancel($edit, UserInterface $account, $method): void {
+  switch ($method) {
+    case 'user_cancel_block_unpublish':
+      // Unpublish decision support files.
+      $storage = \Drupal::entityTypeManager()->getStorage('decision_support_file');
+      $decision_support_file_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->condition('status', 1)
+        ->accessCheck(FALSE)
+        ->execute();
+      foreach ($storage->loadMultiple($decision_support_file_ids) as $decision_support_file) {
+        $decision_support_file->set('status', FALSE)->save();
+      }
+      break;
+
+    case 'user_cancel_reassign':
+      // Anonymize decision support files.
+      $storage = \Drupal::entityTypeManager()->getStorage('decision_support_file');
+      $decision_support_file_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->accessCheck(FALSE)
+        ->execute();
+      foreach ($storage->loadMultiple($decision_support_file_ids) as $decision_support_file) {
+        $decision_support_file->setOwnerId(0)->save();
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_predelete() for user entities.
+ */
+function decision_support_file_user_predelete(UserInterface $account): void {
+  // Delete decision support files that belong to this account.
+  $storage = \Drupal::entityTypeManager()->getStorage('decision_support_file');
+  $decision_support_file_ids = $storage->getQuery()
+    ->condition('uid', $account->id())
+    ->accessCheck(FALSE)
+    ->execute();
+  $storage->delete(
+    $storage->loadMultiple($decision_support_file_ids)
+  );
+}

@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - decision_support
+id: decision_support_entity_delete_action
+label: 'Delete decision supports'
+type: decision_support_entity
+plugin: entity:delete_action:decision_support_entity
+configuration: {  }

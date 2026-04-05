@@ -1,0 +1,5 @@
+decision_support_entity.add_form:
+  title: 'Add decision support'
+  route_name: entity.decision_support_entity.add_form
+  appears_on:
+    - entity.decision_support_entity.collection

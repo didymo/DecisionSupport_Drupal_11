@@ -1,0 +1,11 @@
+administer decision_support_file:
+  title: 'Administer decision support files'
+  restrict access: true
+view decision_support_file:
+  title: 'View decision support file'
+edit decision_support_file:
+  title: 'Edit decision support file'
+delete decision_support_file:
+  title: 'Delete decision support file'
+create decision_support_file:
+  title: 'Create decision support file'

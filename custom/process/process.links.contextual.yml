@@ -1,0 +1,10 @@
+entity.process.edit_form:
+  route_name: entity.process.edit_form
+  group: process
+  title: 'Edit'
+
+entity.process.delete_form:
+  route_name: entity.process.delete_form
+  group: process
+  title: 'Delete'
+  weight: 10

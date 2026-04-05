@@ -1,0 +1,5 @@
+process.add_form:
+  title: 'Add process'
+  route_name: entity.process.add_form
+  appears_on:
+    - entity.process.collection

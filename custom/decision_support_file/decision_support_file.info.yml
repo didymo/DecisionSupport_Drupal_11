@@ -1,0 +1,13 @@
+name: 'Decision Support Files'
+type: module
+description: 'Handles files uploaded during investigations.'
+package: 'CS321'
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:rest
+  - drupal:file
+  - decision_support:decision_support
+config_devel:
+  - rest.resource.archive_decision_support_file
+  - rest.resource.get_decision_support_file
+  - rest.resource.post_decision_support_file

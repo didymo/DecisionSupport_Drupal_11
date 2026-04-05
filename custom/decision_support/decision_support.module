@@ -1,0 +1,97 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * @file
+ * Provides a decision support entity type.
+ */
+
+use Drupal\Core\Render\Element;
+use Drupal\Core\Entity\RevisionableStorageInterface;
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function decision_support_theme(): array {
+  return [
+    'decision_support_entity' => ['render element' => 'elements'],
+  ];
+}
+
+/**
+ * Prepares variables for decision support templates.
+ *
+ * Default template: decision-support-entity.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the decision support information and any
+ *     fields attached to the entity.
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_decision_support_entity(array &$variables): void {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+}
+
+/**
+ * Implements hook_user_cancel().
+ */
+function decision_support_user_cancel($edit, UserInterface $account, $method): void {
+  switch ($method) {
+    case 'user_cancel_block_unpublish':
+      // Unpublish decision supports.
+      $storage = \Drupal::entityTypeManager()->getStorage('decision_support_entity');
+      $decision_support_entity_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->condition('status', 1)
+        ->accessCheck(FALSE)
+        ->execute();
+      foreach ($storage->loadMultiple($decision_support_entity_ids) as $decision_support_entity) {
+        $decision_support_entity->set('status', FALSE)->save();
+      }
+      break;
+
+    case 'user_cancel_reassign':
+      // Anonymize decision supports.
+      $storage = \Drupal::entityTypeManager()->getStorage('decision_support_entity');
+      $decision_support_entity_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->accessCheck(FALSE)
+        ->execute();
+      foreach ($storage->loadMultiple($decision_support_entity_ids) as $decision_support_entity) {
+        $decision_support_entity->setOwnerId(0)->save();
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_predelete() for user entities.
+ */
+function decision_support_user_predelete(UserInterface $account): void {
+  // Delete decision supports that belong to this account.
+  $storage = \Drupal::entityTypeManager()->getStorage('decision_support_entity');
+  $decision_support_entity_ids = $storage->getQuery()
+    ->condition('uid', $account->id())
+    ->accessCheck(FALSE)
+    ->execute();
+  $storage->delete(
+    $storage->loadMultiple($decision_support_entity_ids)
+  );
+  // Delete old revisions.
+  $decision_support_entity_ids = $storage->getQuery()
+    ->allRevisions()
+    ->condition('uid', $account->id())
+    ->accessCheck(FALSE)
+    ->execute();
+  if ($storage instanceof RevisionableStorageInterface) {
+    foreach (array_keys($decision_support_entity_ids) as $revision_id) {
+      $storage->deleteRevision($revision_id);
+    }
+  }
+}

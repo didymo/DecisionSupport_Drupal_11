@@ -1,0 +1,17 @@
+name: 'Process'
+type: module
+description: 'Process Class to build process'
+package: 'CS321'
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:rest
+  - drupal:taxonomy
+  - drupal:user
+config_devel:
+  - rest.resource.get_process
+  - rest.resource.get_process_list
+  - rest.resource.post_process
+  - rest.resource.patch_process
+  - rest.resource.update_process
+  - rest.resource.duplicate_process
+  - rest.resource.delete_process

@@ -1,0 +1,18 @@
+name: 'Decision Support'
+type: module
+description: 'Contains instances of Decision Support based off of a process.'
+package: 'CS321'
+core_version_requirement: ^10 || ^11
+dependencies:
+  - drupal:rest
+  - drupal:taxonomy
+  - drupal:user
+  - process:process
+config_devel:
+  - rest.resource.archive_decision_support
+  - rest.resource.get_decision_support_list
+  - rest.resource.get_decision_support_report_list
+  - rest.resource.get_decision_support
+  - rest.resource.get_decision_support_report
+  - rest.resource.patch_decision_support
+  - rest.resource.post_decision_support

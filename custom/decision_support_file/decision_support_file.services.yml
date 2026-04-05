@@ -1,0 +1,4 @@
+services:
+  decision_support_file.service:
+    class: Drupal\decision_support_file\Services\DecisionSupportFile\DecisionSupportFileService
+    arguments: ['@entity_type.manager', '@logger.channel.default', '@current_user']

@@ -1,0 +1,22 @@
+entity.decision_support_entity.settings:
+  title: 'Settings'
+  route_name: entity.decision_support_entity.settings
+  base_route: entity.decision_support_entity.settings
+entity.decision_support_entity.view:
+  title: 'View'
+  route_name: entity.decision_support_entity.canonical
+  base_route: entity.decision_support_entity.canonical
+entity.decision_support_entity.edit_form:
+  title: 'Edit'
+  route_name: entity.decision_support_entity.edit_form
+  base_route: entity.decision_support_entity.canonical
+entity.decision_support_entity.delete_form:
+  title: 'Delete'
+  route_name: entity.decision_support_entity.delete_form
+  base_route: entity.decision_support_entity.canonical
+  weight: 10
+entity.decision_support_entity.collection:
+  title: 'Decision Supports'
+  route_name: entity.decision_support_entity.collection
+  base_route: system.admin_content
+  weight: 10
