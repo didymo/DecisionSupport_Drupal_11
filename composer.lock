@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "04b299932d408e7f8e540f6a797c55e8",
+    "content-hash": "7a7194f2a93aed5c89e67dec064b246f",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1432,6 +1432,20 @@
                 "source": "https://github.com/drupal/core-recommended/tree/11.3.5"
             },
             "time": "2026-03-06T09:54:42+00:00"
+        },
+        {
+            "name": "drupal/dsd_logout",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "custom/dsd_logout",
+                "reference": "f30d2cc9e7df4a5bf5dec7883d5beec0cbbec6d3"
+            },
+            "type": "drupal-custom-module",
+            "description": "OAuth logout endpoint that revokes Simple OAuth tokens and logs out Drupal sessions.",
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "drupal/restui",
@@ -15802,7 +15816,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "drupal/dsd_logout": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {},
