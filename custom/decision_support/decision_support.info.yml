@@ -1,7 +1,7 @@
 name: 'Decision Support'
 type: module
 description: 'Contains instances of Decision Support based off of a process.'
-package: 'CS321'
+package: 'Didymo Designs'
 core_version_requirement: ^10 || ^11
 dependencies:
   - drupal:rest

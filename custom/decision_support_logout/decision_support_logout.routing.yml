@@ -1,0 +1,10 @@
+decision_support_logout.logout:
+  path: '/oauth/logout'
+  defaults:
+    _controller: '\Drupal\decision_support_logout\Controller\DecisionSupportLogoutController::logout'
+    _format: 'json'
+  methods: [POST]
+  requirements:
+    _custom_access: '\Drupal\decision_support_logout\Controller\DecisionSupportLogoutController::access'
+  options:
+    no_cache: TRUE

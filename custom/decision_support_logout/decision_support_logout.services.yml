@@ -1,0 +1,4 @@
+services:
+  decision_support_logout.token_revoker:
+    class: Drupal\decision_support_logout\Service\TokenRevoker
+    arguments: ['@entity_type.manager']

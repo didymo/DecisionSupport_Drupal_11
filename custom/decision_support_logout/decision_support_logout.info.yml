@@ -1,7 +1,7 @@
-name: 'DSD Logout'
+name: 'Decision Support Logout'
 type: module
 description: 'OAuth logout endpoint that revokes Simple OAuth tokens and logs out Drupal sessions.'
-package: Custom
+package: 'Didymo Designs'
 core_version_requirement: ^11
 dependencies:
   - simple_oauth:simple_oauth

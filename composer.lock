@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a7194f2a93aed5c89e67dec064b246f",
+    "content-hash": "1f453f5ef17da25f748970121aaacc74",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1434,14 +1434,22 @@
             "time": "2026-03-06T09:54:42+00:00"
         },
         {
-            "name": "drupal/dsd_logout",
+            "name": "drupal/decision_support_logout",
             "version": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "custom/dsd_logout",
-                "reference": "f30d2cc9e7df4a5bf5dec7883d5beec0cbbec6d3"
+                "url": "custom/decision_support_logout",
+                "reference": "1ad9dc14cb8349c9efcab5638121ff48718809ac"
+            },
+            "require": {
+                "drupal/core": "^11",
+                "drupal/simple_oauth": "^6.1",
+                "php": ">=8.3"
             },
             "type": "drupal-custom-module",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
             "description": "OAuth logout endpoint that revokes Simple OAuth tokens and logs out Drupal sessions.",
             "transport-options": {
                 "relative": true
@@ -15817,7 +15825,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "drupal/dsd_logout": 20
+        "drupal/decision_support_logout": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

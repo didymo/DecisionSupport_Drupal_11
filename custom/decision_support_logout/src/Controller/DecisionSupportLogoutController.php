@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Drupal\dsd_logout\Controller;
+namespace Drupal\decision_support_logout\Controller;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\dsd_logout\Service\TokenRevoker;
+use Drupal\decision_support_logout\Service\TokenRevoker;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Handles OAuth logout requests.
  */
-final class DsdLogoutController extends ControllerBase {
+final class DecisionSupportLogoutController extends ControllerBase {
 
   /**
    * Constructs the controller.
@@ -30,10 +30,10 @@ final class DsdLogoutController extends ControllerBase {
    */
   public static function create(ContainerInterface $container): self {
     /** @var \Drupal\Core\Logger\LoggerChannelInterface $logger */
-    $logger = $container->get('logger.channel.dsd_logout');
+    $logger = $container->get('logger.channel.decision_support_logout');
 
     return new self(
-      $container->get('dsd_logout.token_revoker'),
+      $container->get('decision_support_logout.token_revoker'),
       $logger,
     );
   }

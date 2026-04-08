@@ -1,7 +1,7 @@
 name: 'Process'
 type: module
 description: 'Process Class to build process'
-package: 'CS321'
+package: 'Didymo Designs'
 core_version_requirement: ^10 || ^11
 dependencies:
   - drupal:rest

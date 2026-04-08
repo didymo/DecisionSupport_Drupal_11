@@ -1,4 +1,0 @@
-services:
-  dsd_logout.token_revoker:
-    class: Drupal\dsd_logout\Service\TokenRevoker
-    arguments: ['@entity_type.manager']

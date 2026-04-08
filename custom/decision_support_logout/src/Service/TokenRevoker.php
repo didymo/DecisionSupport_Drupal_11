@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Drupal\dsd_logout\Service;
+namespace Drupal\decision_support_logout\Service;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Session\AccountInterface;

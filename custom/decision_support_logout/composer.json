@@ -1,5 +1,5 @@
 {
-    "name": "drupal/dsd_logout",
+    "name": "drupal/decision_support_logout",
     "description": "OAuth logout endpoint that revokes Simple OAuth tokens and logs out Drupal sessions.",
     "type": "drupal-custom-module",
     "license": "GPL-2.0-or-later",

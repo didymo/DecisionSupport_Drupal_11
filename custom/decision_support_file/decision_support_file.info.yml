@@ -1,7 +1,7 @@
 name: 'Decision Support Files'
 type: module
 description: 'Handles files uploaded during investigations.'
-package: 'CS321'
+package: 'Didymo Designs'
 core_version_requirement: ^10 || ^11
 dependencies:
   - drupal:rest
