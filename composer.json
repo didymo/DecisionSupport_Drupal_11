@@ -15,6 +15,7 @@
     "drupal/consumers": "^1.24",
     "drupal/core-composer-scaffold": "^11",
     "drupal/core-recommended": "^11",
+    "drupal/dsd_logout": "@dev",
     "drupal/restui": "^1.22",
     "drupal/simple_oauth": "^6.1",
     "drush/drush": "^13",
@@ -38,6 +39,10 @@
     {
       "type": "composer",
       "url": "https://asset-packagist.org"
+    },
+    {
+      "type": "path",
+      "url": "custom/*"
     }
   ],
   "minimum-stability": "stable",

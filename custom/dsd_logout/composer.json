@@ -1,0 +1,11 @@
+{
+    "name": "drupal/dsd_logout",
+    "description": "OAuth logout endpoint that revokes Simple OAuth tokens and logs out Drupal sessions.",
+    "type": "drupal-custom-module",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": ">=8.3",
+        "drupal/core": "^11",
+        "drupal/simple_oauth": "^6.1"
+    }
+}

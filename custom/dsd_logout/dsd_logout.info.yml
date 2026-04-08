@@ -1,0 +1,7 @@
+name: 'DSD Logout'
+type: module
+description: 'OAuth logout endpoint that revokes Simple OAuth tokens and logs out Drupal sessions.'
+package: Custom
+core_version_requirement: ^11
+dependencies:
+  - simple_oauth:simple_oauth
