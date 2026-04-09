@@ -1,0 +1,22 @@
+{#
+/**
+ * @file
+ * Login page — styled to match the Angular authenticate component.
+ */
+#}
+{{ attach_library('decision_support_theme/login') }}
+
+<div class="dsd-login-header">
+  <div class="dsd-login-logo">
+    <img src="{{ base_path ~ directory }}/Logo.png" alt="Decision Support" width="190">
+  </div>
+</div>
+
+<div class="dsd-login-page">
+  <div class="dsd-login-wrapper">
+    <div class="dsd-login-card">
+      <h1>Decision Support Software</h1>
+      {{ page.content }}
+    </div>
+  </div>
+</div>

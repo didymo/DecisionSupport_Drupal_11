@@ -1,0 +1,27 @@
+name: 'Decision Support'
+type: theme
+'base theme': stable9
+version: 1.0.0
+libraries:
+  - decision_support_theme/base
+  - decision_support_theme/messages
+  - core/normalize
+libraries-extend:
+  user/drupal.user:
+    - decision_support_theme/user
+  core/drupal.dropbutton:
+    - decision_support_theme/dropbutton
+  core/drupal.dialog:
+    - decision_support_theme/dialog
+  file/drupal.file:
+    - decision_support_theme/file
+  core/drupal.item-list:
+    - decision_support_theme/item-list
+  core/drupal.progress:
+    - decision_support_theme/progress
+  core/drupal.tablesort:
+    - decision_support_theme/drupal.tablesort
+logo: Logo.png
+description: ''
+core_version_requirement: ^11
+generator: 'starterkit_theme:11.3.5'
