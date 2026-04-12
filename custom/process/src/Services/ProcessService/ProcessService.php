@@ -6,6 +6,7 @@ namespace Drupal\process\Services\ProcessService;
 
 use Drupal\process\Entity\Process;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Session\AccountProxyInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -30,11 +31,19 @@ final class ProcessService implements ProcessServiceInterface {
   protected LoggerInterface $logger;
 
   /**
+   * The current user.
+   *
+   * @var \Drupal\Core\Session\AccountProxyInterface
+   */
+  protected AccountProxyInterface $currentUser;
+
+  /**
    * Constructs a ProcessService object.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, LoggerInterface $logger) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, LoggerInterface $logger, AccountProxyInterface $current_user) {
     $this->entityTypeManager = $entity_type_manager;
     $this->logger = $logger;
+    $this->currentUser = $current_user;
   }
 
   /**
@@ -91,11 +100,16 @@ final class ProcessService implements ProcessServiceInterface {
    * {@inheritdoc}
    */
   public function createProcess(array $data) {
-    if (empty($data['revision_status'])) {
-      throw new BadRequestHttpException('Missing required field: revision_status');
+    if (empty($data['label']) || empty($data['revision_status'])) {
+      throw new BadRequestHttpException('Missing required fields: label, revision_status');
     }
 
-    $process = Process::create($data);
+    // Whitelist: only accept label from the client. All other fields are set
+    // server-side to prevent mass assignment (uid, status, json_string, etc.).
+    $process = Process::create([
+      'label' => $data['label'],
+    ]);
+    $process->setOwnerId((int) $this->currentUser->id());
     $process->setRevisionStatus($data['revision_status']);
     $process->save();
 
@@ -118,7 +132,7 @@ final class ProcessService implements ProcessServiceInterface {
    * {@inheritdoc}
    */
   public function duplicateProcess(array $data) {
-    if (empty($data['revision_status']) || empty($data['json_string'])) {
+    if (empty($data['label']) || empty($data['revision_status']) || empty($data['json_string'])) {
       throw new BadRequestHttpException('Missing required fields for process duplication');
     }
 
@@ -127,7 +141,12 @@ final class ProcessService implements ProcessServiceInterface {
       throw new BadRequestHttpException('Invalid process json_string payload');
     }
 
-    $process = Process::create($data);
+    // Whitelist: only accept label from the client. All other fields are set
+    // server-side to prevent mass assignment (uid, status, json_string, etc.).
+    $process = Process::create([
+      'label' => $data['label'],
+    ]);
+    $process->setOwnerId((int) $this->currentUser->id());
     $process->setRevisionStatus($data['revision_status']);
     $process->save();
 

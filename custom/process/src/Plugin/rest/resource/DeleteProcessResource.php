@@ -83,6 +83,8 @@ final class DeleteProcessResource extends ResourceBase {
    *   Thrown when an error occurs during the process.
    */
   public function patch($processId): ModifiedResourceResponse {
+    // Angular: ProcessService.archiveProcess() — PATCH with no request body.
+    // The process ID is passed via the URL only. Do not add a body parameter here.
     // Check user permissions.
     if (!$this->currentUser->hasPermission('delete process')) {
       throw new AccessDeniedHttpException();

@@ -7,6 +7,7 @@ namespace Drupal\decision_support\Services\DecisionSupport;
 use Drupal\decision_support\Entity\DecisionSupport;
 use Drupal\decision_support_file\Services\DecisionSupportFile\DecisionSupportFileServiceInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Session\AccountProxyInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -38,12 +39,20 @@ final class DecisionSupportService implements DecisionSupportServiceInterface {
   protected DecisionSupportFileServiceInterface $decisionSupportFileService;
 
   /**
+   * The current user.
+   *
+   * @var \Drupal\Core\Session\AccountProxyInterface
+   */
+  protected AccountProxyInterface $currentUser;
+
+  /**
    * Constructs a DecisionSupportService object.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, LoggerInterface $logger, DecisionSupportFileServiceInterface $decision_support_file_service) {
+  public function __construct(EntityTypeManagerInterface $entity_type_manager, LoggerInterface $logger, DecisionSupportFileServiceInterface $decision_support_file_service, AccountProxyInterface $current_user) {
     $this->entityTypeManager = $entity_type_manager;
     $this->logger = $logger;
     $this->decisionSupportFileService = $decision_support_file_service;
+    $this->currentUser = $current_user;
   }
 
   /**
@@ -198,7 +207,12 @@ final class DecisionSupportService implements DecisionSupportServiceInterface {
       throw new BadRequestHttpException('Process data is malformed');
     }
 
-    $decisionSupport = DecisionSupport::create($data);
+    // Whitelist: only accept label from the client. All other fields are set
+    // server-side to prevent mass assignment (uid, status, json_string, etc.).
+    $decisionSupport = DecisionSupport::create([
+      'label' => $data['label'] ?? '',
+    ]);
+    $decisionSupport->setOwnerId((int) $this->currentUser->id());
     $decisionSupport->setIsCompleted(FALSE);
     $decisionSupport->save();
 

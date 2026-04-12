@@ -3,7 +3,8 @@
   <description>Drupal + DrupalPractice standards for custom modules and themes.</description>
 
   <!-- Limit scans to existing custom code paths -->
-  <file>web</file>
+  <file>web/modules/custom</file>
+  <file>web/themes/custom</file>
 
   <!-- Exclude core and vendor explicitly, in case they're under the same root -->
   <exclude-pattern>web/core/*</exclude-pattern>

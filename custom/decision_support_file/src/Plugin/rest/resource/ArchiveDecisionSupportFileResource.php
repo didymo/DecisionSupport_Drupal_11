@@ -74,6 +74,8 @@ final class ArchiveDecisionSupportFileResource extends ResourceBase {
    * Responds to PATCH requests.
    */
   public function patch($fileId): ModifiedResourceResponse {
+    // Angular: DocumentUploadService.archiveDecisionSupportDocument() — PATCH with no request body.
+    // The file ID is passed via the URL only. Do not add a body parameter here.
 
     // Check user permissions.
     if (!$this->currentUser->hasPermission('delete decision_support_file')) {

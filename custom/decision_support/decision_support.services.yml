@@ -1,4 +1,4 @@
 services:
   decision_support.service:
     class: 'Drupal\decision_support\Services\DecisionSupport\DecisionSupportService'
-    arguments: ['@entity_type.manager', '@logger.channel.default', '@decision_support_file.service']
+    arguments: ['@entity_type.manager', '@logger.channel.default', '@decision_support_file.service', '@current_user']

@@ -1,7 +1,8 @@
 parameters:
-      level: 2
-      paths:
-        - web
-      excludePaths:
+    level: 2
+    paths:
+        - web/modules/custom
+        - web/themes/custom
+    excludePaths:
         analyse:
-          - web/sites/default/*
+            - web/sites/default/*

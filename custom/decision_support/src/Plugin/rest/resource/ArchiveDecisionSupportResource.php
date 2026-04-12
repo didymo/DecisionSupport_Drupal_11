@@ -83,6 +83,8 @@ final class ArchiveDecisionSupportResource extends ResourceBase {
    *   Thrown when the specified entity does not exist.
    */
   public function delete($decisionSupportId): ModifiedResourceResponse {
+    // Angular: DecisionSupportService.archiveDecisionSupport() — DELETE with no request body.
+    // Uses DELETE (not PATCH). The ID is passed via the URL only. Do not add a body parameter here.
     // Check user permission.
     if (!$this->currentUser->hasPermission('delete decision_support_entity')) {
       throw new AccessDeniedHttpException();
