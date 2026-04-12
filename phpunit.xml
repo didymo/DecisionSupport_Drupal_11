@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="web/core/tests/bootstrap.php"
+         cacheResult="false"
+         executionOrder="random"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutChangesToGlobalState="true"
+         failOnRisky="true"
+         failOnWarning="true"
+         colors="true">
+  <testsuites>
+    <testsuite name="unit">
+      <directory>web/modules/custom/*/tests/src/Unit</directory>
+    </testsuite>
+    <testsuite name="kernel">
+      <directory>web/modules/custom/*/tests/src/Kernel</directory>
+    </testsuite>
+    <testsuite name="functional">
+      <directory>web/modules/custom/*/tests/src/Functional</directory>
+    </testsuite>
+  </testsuites>
+
+  <php>
+    <ini name="error_reporting" value="32767"/>
+    <ini name="memory_limit" value="-1"/>
+
+    <!-- Prefer environment variables for local configuration.
+         If you want defaults, uncomment and set appropriately. -->
+    <!-- <env name="SIMPLETEST_BASE_URL" value="http://127.0.0.1"/> -->
+    <!-- <env name="SIMPLETEST_DB" value="sqlite://localhost/web/sites/default/files/.ht.sqlite"/> -->
+
+    <!-- Disable Symfony deprecation helper by default for developer velocity.
+         If you want strict deprecation control, change this. -->
+    <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled"/>
+  </php>
+</phpunit>
